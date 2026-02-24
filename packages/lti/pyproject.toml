@@ -1,7 +1,7 @@
 [project]
-name = "kirchhoff"
+name = "lti"
 version = "0.1.0"
-description = "A lightweight circuit simulator"
+description = "A lightweight circuit simulator for LTI systems"
 readme = "README.md"
 authors = [
     { name = "Dimitar Dimitrov", email = "dimitar.dimitrov@cba.mit.edu" }
@@ -9,15 +9,6 @@ authors = [
 requires-python = ">=3.13"
 dependencies = []
 
-[project.scripts]
-kirchhoff = "kirchhoff:main"
-
 [build-system]
 requires = ["uv_build>=0.10.5,<0.11.0"]
 build-backend = "uv_build"
-
-[tool.uv.workspace]
-members = [
-    "packages/netlist",
-    "packages/lti",
-]
