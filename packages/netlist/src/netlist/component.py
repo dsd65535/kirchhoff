@@ -25,8 +25,6 @@ class Component(ABC):
         """Initialize"""
 
         self._refdes = params.refdes
-        self._terminals = {} if params.terminals is None else params.terminals
-        self._config = {} if params.config is None else params.config
         self._placement = params.placement
 
     @property
@@ -39,13 +37,13 @@ class Component(ABC):
     def terminals(self) -> dict[str, Node | None]:
         """Mapping of Terminals to Nodes"""
 
-        return self._terminals
+        raise NotImplementedError
 
     @property
     def config(self) -> dict[str, Any]:
         """Device-specific Configuration"""
 
-        return self._config
+        raise NotImplementedError
 
     @property
     def placement(self) -> tuple[float | None, float | None, float | None]:
