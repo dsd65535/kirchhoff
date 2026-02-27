@@ -1,2 +1,1 @@
-def hello() -> str:
-    return "Hello from netlist!"
+"""A lightweight circuit netlist utility"""
