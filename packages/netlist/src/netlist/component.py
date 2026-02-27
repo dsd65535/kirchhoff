@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from dataclasses import field
 from typing import Any
 
-Node = str
+from .common import Node
+from .primitives import Primitive
 
 
 @dataclass
@@ -50,3 +51,9 @@ class Component(ABC):
         """Placement (x, y, rotation in degrees)"""
 
         return self._placement
+
+    @property
+    def as_primitives(self) -> list[Primitive]:
+        """As a network of primitives at current operating point"""
+
+        raise NotImplementedError

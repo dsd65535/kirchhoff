@@ -1,12 +1,17 @@
+# pylint:disable=fixme  # TODO: remove the TODOs
 """This module containts some generic components"""
 
 from dataclasses import asdict
 from dataclasses import dataclass
 from typing import Any
 
+from ..common import Node
 from ..component import Component
 from ..component import ComponentParams
-from ..component import Node
+from ..primitives import Primitive
+from ..primitives import PrimitiveCapacitor
+from ..primitives import PrimitiveInductor
+from ..primitives import PrimitiveResistor
 
 
 @dataclass
@@ -55,6 +60,24 @@ class Resistor(Component):
 
         return asdict(self._config)
 
+    @property
+    def as_primitives(self) -> list[Primitive]:
+        """As a network of primitives at current operating point"""
+
+        if self._config.resistance is None:
+            raise ValueError(f"Resistance of {self.refdes} is None")
+        if self._terminals.a is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+        if self._terminals.b is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+
+        # TODO: find a nice way to keep these associated with the original component
+        return [
+            PrimitiveResistor(
+                (self._terminals.a, self._terminals.b), self._config.resistance
+            )
+        ]
+
 
 @dataclass
 class CapacitorConfig:
@@ -94,6 +117,24 @@ class Capacitor(Component):
 
         return asdict(self._config)
 
+    @property
+    def as_primitives(self) -> list[Primitive]:
+        """As a network of primitives at current operating point"""
+
+        if self._config.capacitance is None:
+            raise ValueError(f"Resistance of {self.refdes} is None")
+        if self._terminals.a is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+        if self._terminals.b is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+
+        # TODO: find a nice way to keep these associated with the original component
+        return [
+            PrimitiveCapacitor(
+                (self._terminals.a, self._terminals.b), self._config.capacitance
+            )
+        ]
+
 
 @dataclass
 class InductorConfig:
@@ -132,3 +173,21 @@ class Inductor(Component):
         """Device-specific Configuration"""
 
         return asdict(self._config)
+
+    @property
+    def as_primitives(self) -> list[Primitive]:
+        """As a network of primitives at current operating point"""
+
+        if self._config.inductance is None:
+            raise ValueError(f"Resistance of {self.refdes} is None")
+        if self._terminals.a is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+        if self._terminals.b is None:
+            raise ValueError(f"Terminal A of {self.refdes} is None")
+
+        # TODO: find a nice way to keep these associated with the original component
+        return [
+            PrimitiveInductor(
+                (self._terminals.a, self._terminals.b), self._config.inductance
+            )
+        ]
