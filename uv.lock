@@ -169,6 +169,10 @@ wheels = [
 name = "kirchhoff"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "lti" },
+    { name = "netlist" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -180,6 +184,10 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [
+    { name = "lti", editable = "packages/lti" },
+    { name = "netlist", editable = "packages/netlist" },
+]
 
 [package.metadata.requires-dev]
 dev = [

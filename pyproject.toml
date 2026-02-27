@@ -7,7 +7,10 @@ authors = [
     { name = "Dimitar Dimitrov", email = "dimitar.dimitrov@cba.mit.edu" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "lti",
+    "netlist",
+]
 
 [project.scripts]
 kirchhoff = "kirchhoff:main"
@@ -21,6 +24,10 @@ members = [
     "packages/netlist",
     "packages/lti",
 ]
+
+[tool.uv.sources]
+netlist = { workspace = true }
+lti = { workspace = true }
 
 [dependency-groups]
 dev = [
